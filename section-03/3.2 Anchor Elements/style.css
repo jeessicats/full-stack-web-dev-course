@@ -1,0 +1,25 @@
+.titulo{
+    color: brown;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+}
+
+#notion{
+    color: black;
+}
+
+#pinterest{
+    color: crimson;
+}
+
+#intagram{
+    color: deeppink;
+}
+
+#youtube{
+    color: darkred;
+}
+
+#chatgpt{
+    color: darkslategray;
+}
