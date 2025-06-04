@@ -74,8 +74,31 @@ app.patch("/jokes/:id", (req, res) => {
 });
 
 //7. DELETE Specific joke
+app.delete("/jokes/:id", (req, res) => {
+  const jokeId = parseInt(req.params.id);
+  const index = jokes.findIndex((j) => j.id === jokeId);
+
+  if (index > -1) {
+    const deletedJoke = jokes.splice(index, 1);
+    res.json(deletedJoke[0]);
+    console.log(`Joke with ID ${jokeId} has been deleted: ${deletedJoke[0].jokeText}`);
+  } else {
+    res.status(404).json({ error: "Joke not found" });
+  }
+});
 
 //8. DELETE All jokes
+app.delete("/jokes", (req, res) => {
+  const masterKeyProvided = req.query.masterKey;
+  if (masterKeyProvided === masterKey) {
+    jokes = [];
+    res.json({ message: "All jokes have been deleted." });
+    res.sendStatus(200);
+    console.log("All jokes have been deleted.");
+  } else {
+    res.status(403).json({ error: "Unauthorized request. Invalid master key." });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
